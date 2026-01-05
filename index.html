@@ -17,16 +17,20 @@
         
         /* Stile Input Ricerca e Select */
         input[type="text"] {
-            width: 100%; padding: 10px; margin-bottom: 5px; 
+            width: 100%; padding: 12px; margin-bottom: 5px; 
             background: #2a2a2a; border: 1px solid #444; border-radius: 8px; 
-            color: white; font-size: 14px; box-sizing: border-box;
+            color: #fff; font-size: 15px; box-sizing: border-box; font-weight: bold;
         }
-        input[type="text"]:focus { outline: none; border-color: var(--accent); }
+        input[type="text"]:focus { outline: none; border-color: var(--accent); background: #333; }
 
         select { 
-            width: 100%; padding: 14px; background: #252525; border: 1px solid #444; 
-            border-radius: 8px; color: white; font-size: 16px; cursor: pointer; appearance: none;
+            width: 100%; padding: 10px; background: #252525; border: 1px solid #444; 
+            border-radius: 8px; color: #ccc; font-size: 14px; cursor: pointer; appearance: none;
+            overflow-y: auto; /* Scrollbar più carina */
         }
+        
+        select option { padding: 8px; border-bottom: 1px solid #333; }
+        select option:checked { background-color: var(--accent); color: #121212; font-weight: bold; }
         select:focus { outline: none; border-color: var(--accent); }
 
         /* Bottone */
@@ -57,19 +61,29 @@
     
     <div class="control-group">
         <label>1. SELEZIONA GIOCO</label>
-        <input type="text" id="searchGame" placeholder="Cerca gioco (es. Factorio)..." onkeyup="filterSelect('searchGame', 'gameSelect')">
-        <select id="gameSelect" size="5"></select> </div>
+        <input type="text" id="searchGame" placeholder="Cerca gioco (es. Cyberpunk)..." 
+               onkeyup="filterSelect('searchGame', 'gameSelect')" 
+               onkeydown="checkEnter(event, 'gameSelect', 'searchGame')">
+        
+        <select id="gameSelect" size="5" onclick="updateInput('gameSelect', 'searchGame')"></select>
+    </div>
 
     <div class="control-group">
         <label>2. IL TUO PROCESSORE (CPU)</label>
-        <input type="text" id="searchCpu" placeholder="Cerca CPU (es. i7, Ryzen 9)..." onkeyup="filterSelect('searchCpu', 'cpuSelect')">
-        <select id="cpuSelect" size="4"></select>
+        <input type="text" id="searchCpu" placeholder="Cerca CPU (es. i7, Ryzen)..." 
+               onkeyup="filterSelect('searchCpu', 'cpuSelect')"
+               onkeydown="checkEnter(event, 'cpuSelect', 'searchCpu')">
+               
+        <select id="cpuSelect" size="4" onclick="updateInput('cpuSelect', 'searchCpu')"></select>
     </div>
 
     <div class="control-group">
         <label>3. LA TUA SCHEDA VIDEO (GPU)</label>
-        <input type="text" id="searchGpu" placeholder="Cerca GPU (es. 4070, 3060)..." onkeyup="filterSelect('searchGpu', 'gpuSelect')">
-        <select id="gpuSelect" size="4"></select>
+        <input type="text" id="searchGpu" placeholder="Cerca GPU (es. 4070, 3060)..." 
+               onkeyup="filterSelect('searchGpu', 'gpuSelect')"
+               onkeydown="checkEnter(event, 'gpuSelect', 'searchGpu')">
+               
+        <select id="gpuSelect" size="4" onclick="updateInput('gpuSelect', 'searchGpu')"></select>
     </div>
 
     <div class="control-group">
@@ -95,25 +109,23 @@
 
 <script>
     let db = {};
-    let originalOptions = {}; // Per salvare le liste originali per il filtro
+    let originalOptions = {};
 
     // CARICAMENTO DB
     fetch('db.json')
         .then(response => response.json())
         .then(data => {
             db = data;
-            popolaCpu(data.cpus); // Funzione speciale per raggruppare AMD/Intel
+            popolaCpu(data.cpus);
             popolaGenerico('gpuSelect', data.gpus);
             popolaGenerico('gameSelect', data.games);
             
-            // Salviamo le opzioni originali per poterle filtrare
             salvaOpzioni('cpuSelect');
             salvaOpzioni('gpuSelect');
             salvaOpzioni('gameSelect');
         })
-        .catch(err => alert("Errore caricamento db.json. Assicurati di aver generato il file con Python!"));
+        .catch(err => alert("Errore caricamento db.json. Assicurati di aver eseguito il file Python!"));
 
-    // Funzione per popolare le CPU con Gruppi (AMD vs Intel)
     function popolaCpu(items) {
         const select = document.getElementById('cpuSelect');
         const amdGroup = document.createElement('optgroup'); amdGroup.label = "AMD RYZEN";
@@ -131,7 +143,6 @@
         select.selectedIndex = 0;
     }
 
-    // Funzione standard per GPU e Giochi
     function popolaGenerico(id, items) {
         const select = document.getElementById(id);
         items.forEach(item => {
@@ -139,7 +150,7 @@
             opt.value = item.score || JSON.stringify(item);
             opt.textContent = item.name;
             
-            if(item.req_gpu) { // Attributi speciali per i giochi
+            if(item.req_gpu) {
                 opt.setAttribute('data-req-gpu', item.req_gpu);
                 opt.setAttribute('data-req-cpu', item.req_cpu);
                 opt.setAttribute('data-opt', item.opt);
@@ -149,21 +160,18 @@
         select.selectedIndex = 0;
     }
 
-    // LOGICA DI RICERCA (FILTRO)
     function salvaOpzioni(id) {
         const select = document.getElementById(id);
-        originalOptions[id] = Array.from(select.options); // Cloniamo le opzioni
+        originalOptions[id] = Array.from(select.options);
     }
 
     function filterSelect(inputId, selectId) {
         const filter = document.getElementById(inputId).value.toUpperCase();
         const select = document.getElementById(selectId);
-        const options = originalOptions[selectId]; // Prendiamo le opzioni originali
+        const options = originalOptions[selectId];
         
-        select.innerHTML = ""; // Puliamo la select corrente
+        select.innerHTML = ""; 
 
-        // Ricostruiamo la select solo con i match
-        // Nota: Per le CPU dobbiamo gestire i gruppi optgroup, qui per semplicità appiattiamo la ricerca
         let count = 0;
         options.forEach(opt => {
             if (opt.text.toUpperCase().indexOf(filter) > -1) {
@@ -177,13 +185,36 @@
             noResult.text = "Nessun risultato...";
             select.appendChild(noResult);
         } else {
-            select.selectedIndex = 0;
+            select.selectedIndex = 0; // Pre-seleziona il primo risultato
         }
     }
 
-    // CALCOLO
+    // --- NUOVE FUNZIONI PER INTERAZIONE MIGLIORE ---
+
+    // 1. Quando clicchi su una riga, aggiorna la barra di ricerca
+    function updateInput(selectId, inputId) {
+        const select = document.getElementById(selectId);
+        const input = document.getElementById(inputId);
+        if (select.selectedIndex !== -1) {
+            input.value = select.options[select.selectedIndex].text;
+        }
+    }
+
+    // 2. Quando premi ENTER nella casella di testo
+    function checkEnter(event, selectId, inputId) {
+        if (event.key === "Enter") {
+            const select = document.getElementById(selectId);
+            if (select.options.length > 0) {
+                select.selectedIndex = 0; // Forza selezione del primo elemento
+                updateInput(selectId, inputId); // Copia testo
+                document.getElementById(inputId).blur(); // Toglie il focus
+            }
+        }
+    }
+
+    // --- FINE NUOVE FUNZIONI ---
+
     function calcolaFPS() {
-        // ... (La logica è simile a prima ma adattata alle nuove risoluzioni)
         const cpuScore = parseInt(document.getElementById('cpuSelect').value);
         const gpuScore = parseInt(document.getElementById('gpuSelect').value);
         const resFactor = parseFloat(document.getElementById('resSelect').value);
@@ -191,8 +222,7 @@
         const gameSel = document.getElementById('gameSelect');
         const gameOpt = gameSel.options[gameSel.selectedIndex];
         
-        // Controllo se l'utente ha selezionato "Nessun risultato"
-        if(!gameOpt.hasAttribute('data-req-gpu')) return alert("Seleziona un gioco valido!");
+        if(!gameOpt || !gameOpt.hasAttribute('data-req-gpu')) return alert("Seleziona un gioco valido!");
 
         const reqGpu = parseFloat(gameOpt.getAttribute('data-req-gpu'));
         const reqCpu = parseFloat(gameOpt.getAttribute('data-req-cpu'));
@@ -201,8 +231,6 @@
         let potenzialeGpu = gpuScore / reqGpu;
         let potenzialeCpu = cpuScore / reqCpu;
         
-        // Bottleneck logic avanzata per risoluzioni alte
-        // A 1600p (1.97) o 4K (4.0), la GPU è molto più stressata
         let pesoGpu = (resFactor >= 1.7) ? 0.85 : 0.6; 
 
         let performance = 0;
@@ -212,15 +240,12 @@
             performance = potenzialeGpu;
             bottleneckMsg = "⚠️ Limite: Scheda Video (GPU Bottleneck). Abbassa la grafica per più FPS.";
         } else {
-            // Se siamo limitati dalla CPU in un gioco come Factorio
             performance = potenzialeCpu;
             bottleneckMsg = "⚠️ Limite: Processore (CPU Bottleneck). La simulazione del gioco sta rallentando.";
         }
 
-        // Formula FPS
         let fps = (60 * performance * gameOptimization) / Math.sqrt(resFactor);
         
-        // Cap realistico (è difficile fare 500fps su giochi AAA)
         if(fps > 300) fps = 300; 
 
         document.getElementById('resultBox').style.display = 'block';
