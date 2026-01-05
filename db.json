@@ -1,27 +1,82 @@
 {
     "cpus": [
         {
+            "name": "AMD Threadripper 7980X",
+            "score": 140000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Threadripper 5995WX",
+            "score": 95000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Threadripper 3990X",
+            "score": 80000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 9 9950X",
+            "score": 68000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 9 7950X",
+            "score": 64000,
+            "brand": "AMD"
+        },
+        {
             "name": "AMD Ryzen 9 7950X3D",
             "score": 63000,
             "brand": "AMD"
         },
         {
-            "name": "AMD Ryzen 7 7800X3D (Best Gaming)",
+            "name": "AMD Ryzen 7 9800X3D (God Tier Gaming)",
+            "score": 62000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 7800X3D (Best Value Gaming)",
             "score": 58000,
             "brand": "AMD"
         },
         {
-            "name": "AMD Ryzen 9 8940HX (Mobile)",
-            "score": 45000,
+            "name": "AMD Ryzen 9 9900X",
+            "score": 56000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 9 7900X",
+            "score": 52000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 9 7900",
+            "score": 48000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 9 5950X",
+            "score": 46000,
             "brand": "AMD"
         },
         {
             "name": "AMD Ryzen 7 5800X3D",
-            "score": 42000,
+            "score": 44000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 9700X",
+            "score": 41000,
             "brand": "AMD"
         },
         {
             "name": "AMD Ryzen 9 5900X",
+            "score": 39500,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 9 3950X",
             "score": 39000,
             "brand": "AMD"
         },
@@ -31,8 +86,73 @@
             "brand": "AMD"
         },
         {
+            "name": "AMD Ryzen 9 8945HS (Mobile)",
+            "score": 34000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 7700",
+            "score": 34000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 5 9600X",
+            "score": 33000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 8700G (APU)",
+            "score": 32000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 9 3900X",
+            "score": 32000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 8845HS (Mobile)",
+            "score": 31000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 5800X",
+            "score": 30000,
+            "brand": "AMD"
+        },
+        {
             "name": "AMD Ryzen 5 7600X",
             "score": 29000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 5 7600",
+            "score": 27000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 5700X",
+            "score": 27000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 5 8600G (APU)",
+            "score": 26000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 5700G",
+            "score": 25000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 3800X",
+            "score": 24000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 3700X",
+            "score": 22500,
             "brand": "AMD"
         },
         {
@@ -41,8 +161,43 @@
             "brand": "AMD"
         },
         {
+            "name": "AMD Ryzen 5 5600",
+            "score": 21500,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 5 5600G",
+            "score": 20000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 5 5500",
+            "score": 19000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 5 3600X",
+            "score": 18500,
+            "brand": "AMD"
+        },
+        {
             "name": "AMD Ryzen 5 3600",
             "score": 17800,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 2700X",
+            "score": 17000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 1800X",
+            "score": 16000,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 7 1700",
+            "score": 14000,
             "brand": "AMD"
         },
         {
@@ -52,17 +207,47 @@
         },
         {
             "name": "AMD Ryzen 3 3300X",
-            "score": 12000,
+            "score": 12500,
             "brand": "AMD"
         },
         {
-            "name": "AMD Ryzen 7 1700",
+            "name": "AMD Ryzen 5 1600AF",
+            "score": 12500,
+            "brand": "AMD"
+        },
+        {
+            "name": "AMD Ryzen 3 3100",
             "score": 11000,
             "brand": "AMD"
         },
         {
+            "name": "Intel Core Ultra 9 285K",
+            "score": 66000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i9-14900KS",
+            "score": 64000,
+            "brand": "Intel"
+        },
+        {
             "name": "Intel Core i9-14900K",
-            "score": 62000,
+            "score": 61000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i9-13900K",
+            "score": 59000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i7-14700K",
+            "score": 54000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core Ultra 7 265K",
+            "score": 53000,
             "brand": "Intel"
         },
         {
@@ -81,8 +266,23 @@
             "brand": "Intel"
         },
         {
+            "name": "Intel Core i5-14600K",
+            "score": 39000,
+            "brand": "Intel"
+        },
+        {
             "name": "Intel Core i5-13600K",
             "score": 38000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core Ultra 5 245K",
+            "score": 37000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i7-12700K",
+            "score": 34000,
             "brand": "Intel"
         },
         {
@@ -91,8 +291,33 @@
             "brand": "Intel"
         },
         {
+            "name": "Intel Core i5-14400F",
+            "score": 27000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i5-13400F",
+            "score": 25000,
+            "brand": "Intel"
+        },
+        {
             "name": "Intel Core i9-11900K",
             "score": 25000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i7-11700K",
+            "score": 24000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i9-10900K",
+            "score": 23000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i5-11600K",
+            "score": 20000,
             "brand": "Intel"
         },
         {
@@ -106,8 +331,33 @@
             "brand": "Intel"
         },
         {
-            "name": "Intel Core i7-8700K",
+            "name": "Intel Core i9-9900K",
+            "score": 18500,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i5-11400F",
+            "score": 17000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i3-13100F",
+            "score": 15000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i7-9700K",
+            "score": 14500,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i3-12100F",
             "score": 14000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i7-8700K",
+            "score": 13500,
             "brand": "Intel"
         },
         {
@@ -116,44 +366,113 @@
             "brand": "Intel"
         },
         {
+            "name": "Intel Core i5-9600K",
+            "score": 11000,
+            "brand": "Intel"
+        },
+        {
             "name": "Intel Core i7-7700K",
-            "score": 10000,
+            "score": 9800,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i7-6700K",
+            "score": 8800,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i7-4790K (Devil's Canyon)",
+            "score": 8000,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i5-7600K",
+            "score": 7000,
             "brand": "Intel"
         },
         {
             "name": "Intel Core i5-6600K",
-            "score": 6500,
+            "score": 6200,
+            "brand": "Intel"
+        },
+        {
+            "name": "Intel Core i7-2600K (Sandy Bridge)",
+            "score": 5500,
             "brand": "Intel"
         }
     ],
     "gpus": [
         {
-            "name": "NVIDIA RTX 5090 (Rumor)",
-            "score": 42000
+            "name": "NVIDIA RTX 5090 (Rumored Monster)",
+            "score": 45000
         },
         {
             "name": "NVIDIA RTX 4090",
             "score": 36000
         },
         {
+            "name": "NVIDIA RTX 5080 (Rumored)",
+            "score": 32000
+        },
+        {
             "name": "AMD Radeon RX 7900 XTX",
             "score": 31000
+        },
+        {
+            "name": "NVIDIA RTX 4080 Super",
+            "score": 29000
         },
         {
             "name": "NVIDIA RTX 4080",
             "score": 28000
         },
         {
+            "name": "AMD Radeon RX 7900 XT",
+            "score": 26000
+        },
+        {
+            "name": "NVIDIA RTX 4070 Ti Super",
+            "score": 24000
+        },
+        {
+            "name": "AMD Radeon RX 6950 XT",
+            "score": 23000
+        },
+        {
             "name": "NVIDIA RTX 4070 Ti",
+            "score": 22500
+        },
+        {
+            "name": "NVIDIA RTX 5070",
             "score": 22000
         },
         {
-            "name": "NVIDIA RTX 5070 (Mobile/Desktop)",
+            "name": "AMD Radeon RX 7900 GRE",
+            "score": 22000
+        },
+        {
+            "name": "NVIDIA RTX 3090 Ti",
             "score": 21000
+        },
+        {
+            "name": "NVIDIA RTX 4070 Super",
+            "score": 20000
+        },
+        {
+            "name": "NVIDIA RTX 3090",
+            "score": 19500
         },
         {
             "name": "AMD Radeon RX 7800 XT",
             "score": 19000
+        },
+        {
+            "name": "NVIDIA RTX 3080 Ti",
+            "score": 18500
+        },
+        {
+            "name": "AMD Radeon RX 6800 XT",
+            "score": 18500
         },
         {
             "name": "NVIDIA RTX 4070",
@@ -164,7 +483,23 @@
             "score": 17000
         },
         {
-            "name": "NVIDIA RTX 4060 Ti",
+            "name": "AMD Radeon RX 7700 XT",
+            "score": 16500
+        },
+        {
+            "name": "NVIDIA RTX 3070 Ti",
+            "score": 14500
+        },
+        {
+            "name": "NVIDIA RTX 2080 Ti",
+            "score": 14000
+        },
+        {
+            "name": "NVIDIA RTX 4060 Ti 16GB",
+            "score": 13800
+        },
+        {
+            "name": "NVIDIA RTX 4060 Ti 8GB",
             "score": 13500
         },
         {
@@ -180,11 +515,31 @@
             "score": 11500
         },
         {
+            "name": "AMD Radeon RX 7600",
+            "score": 11000
+        },
+        {
             "name": "NVIDIA RTX 4060",
             "score": 10500
         },
         {
+            "name": "Intel Arc A770 16GB",
+            "score": 10500
+        },
+        {
+            "name": "NVIDIA RTX 2070 Super",
+            "score": 10000
+        },
+        {
             "name": "NVIDIA GTX 1080 Ti",
+            "score": 9500
+        },
+        {
+            "name": "AMD Radeon RX 6600 XT",
+            "score": 9500
+        },
+        {
+            "name": "Intel Arc A750",
             "score": 9500
         },
         {
@@ -196,8 +551,24 @@
             "score": 8100
         },
         {
+            "name": "Intel Arc A580",
+            "score": 8000
+        },
+        {
             "name": "NVIDIA RTX 2060",
             "score": 7500
+        },
+        {
+            "name": "NVIDIA GTX 1080",
+            "score": 7500
+        },
+        {
+            "name": "AMD Vega 64",
+            "score": 6500
+        },
+        {
+            "name": "NVIDIA RTX 3050",
+            "score": 6000
         },
         {
             "name": "NVIDIA GTX 1660 Super",
@@ -208,62 +579,42 @@
             "score": 4200
         },
         {
-            "name": "AMD Radeon RX 580",
+            "name": "AMD Radeon RX 580 8GB",
             "score": 4000
         },
         {
             "name": "NVIDIA GTX 1650",
             "score": 3500
+        },
+        {
+            "name": "NVIDIA GTX 970",
+            "score": 3500
+        },
+        {
+            "name": "AMD Radeon RX 570 4GB",
+            "score": 3500
+        },
+        {
+            "name": "Intel Arc A380",
+            "score": 3000
+        },
+        {
+            "name": "NVIDIA GTX 1050 Ti",
+            "score": 2800
         }
     ],
     "games": [
         {
             "name": "Alan Wake 2",
             "req_gpu": 14000,
-            "req_cpu": 10000,
+            "req_cpu": 12000,
             "opt": 0.8
         },
         {
-            "name": "Apex Legends",
-            "req_gpu": 5000,
-            "req_cpu": 7000,
-            "opt": 1.1
-        },
-        {
-            "name": "Ark: Survival Ascended",
-            "req_gpu": 14000,
-            "req_cpu": 12000,
-            "opt": 0.75
-        },
-        {
-            "name": "Assassin's Creed Mirage",
-            "req_gpu": 8000,
-            "req_cpu": 9000,
-            "opt": 0.9
-        },
-        {
-            "name": "Astroneer",
-            "req_gpu": 3000,
-            "req_cpu": 6000,
-            "opt": 1.1
-        },
-        {
-            "name": "Baldur's Gate 3",
-            "req_gpu": 7500,
-            "req_cpu": 9000,
-            "opt": 0.95
-        },
-        {
-            "name": "Call of Duty: Warzone",
+            "name": "Call of Duty: Modern Warfare III",
             "req_gpu": 6000,
             "req_cpu": 10000,
             "opt": 0.9
-        },
-        {
-            "name": "Cities: Skylines II",
-            "req_gpu": 12000,
-            "req_cpu": 18000,
-            "opt": 0.7
         },
         {
             "name": "Counter-Strike 2",
@@ -274,7 +625,7 @@
         {
             "name": "Cyberpunk 2077 (Path Tracing)",
             "req_gpu": 25000,
-            "req_cpu": 14000,
+            "req_cpu": 15000,
             "opt": 0.8
         },
         {
@@ -284,33 +635,15 @@
             "opt": 0.85
         },
         {
-            "name": "Diablo IV",
-            "req_gpu": 5000,
-            "req_cpu": 6000,
-            "opt": 1.1
-        },
-        {
-            "name": "Dota 2",
-            "req_gpu": 2000,
-            "req_cpu": 4000,
-            "opt": 1.3
-        },
-        {
-            "name": "Elden Ring",
-            "req_gpu": 7000,
-            "req_cpu": 8000,
-            "opt": 0.95
-        },
-        {
-            "name": "Escape from Tarkov",
-            "req_gpu": 7000,
-            "req_cpu": 15000,
-            "opt": 0.7
+            "name": "Dragon's Dogma 2",
+            "req_gpu": 12000,
+            "req_cpu": 18000,
+            "opt": 0.75
         },
         {
             "name": "Factorio (Megabase)",
             "req_gpu": 2000,
-            "req_cpu": 15000,
+            "req_cpu": 18000,
             "opt": 0.95
         },
         {
@@ -320,16 +653,10 @@
             "opt": 0.85
         },
         {
-            "name": "Fortnite (Performance)",
+            "name": "Fortnite (Performance Mode)",
             "req_gpu": 3000,
             "req_cpu": 8000,
-            "opt": 1.1
-        },
-        {
-            "name": "Forza Horizon 5",
-            "req_gpu": 7000,
-            "req_cpu": 8000,
-            "opt": 1.1
+            "opt": 1.2
         },
         {
             "name": "Frostpunk 2",
@@ -338,16 +665,10 @@
             "opt": 0.85
         },
         {
-            "name": "GTA V",
-            "req_gpu": 3500,
-            "req_cpu": 5000,
-            "opt": 1.2
-        },
-        {
-            "name": "God of War Ragnarok",
-            "req_gpu": 8000,
-            "req_cpu": 9000,
-            "opt": 1.0
+            "name": "GTA VI (Stima)",
+            "req_gpu": 18000,
+            "req_cpu": 16000,
+            "opt": 0.75
         },
         {
             "name": "Helldivers 2",
@@ -356,46 +677,16 @@
             "opt": 0.9
         },
         {
-            "name": "Hogwarts Legacy",
-            "req_gpu": 9000,
-            "req_cpu": 10000,
+            "name": "Microsoft Flight Simulator 2024",
+            "req_gpu": 15000,
+            "req_cpu": 19000,
             "opt": 0.8
         },
         {
-            "name": "League of Legends",
-            "req_gpu": 1000,
-            "req_cpu": 2500,
-            "opt": 1.8
-        },
-        {
-            "name": "Microsoft Flight Simulator",
-            "req_gpu": 10000,
-            "req_cpu": 16000,
-            "opt": 0.8
-        },
-        {
-            "name": "Minecraft (RTX/Shaders)",
+            "name": "Minecraft (Shaders)",
             "req_gpu": 12000,
             "req_cpu": 10000,
             "opt": 0.8
-        },
-        {
-            "name": "Minecraft (Vanilla)",
-            "req_gpu": 1500,
-            "req_cpu": 6000,
-            "opt": 1.2
-        },
-        {
-            "name": "No Man's Sky",
-            "req_gpu": 7000,
-            "req_cpu": 9000,
-            "opt": 0.9
-        },
-        {
-            "name": "Overwatch 2",
-            "req_gpu": 4000,
-            "req_cpu": 6000,
-            "opt": 1.2
         },
         {
             "name": "Palworld",
@@ -404,31 +695,13 @@
             "opt": 0.9
         },
         {
-            "name": "Rainbow Six Siege",
-            "req_gpu": 3000,
-            "req_cpu": 5000,
-            "opt": 1.4
-        },
-        {
             "name": "Red Dead Redemption 2",
             "req_gpu": 6500,
             "req_cpu": 7000,
             "opt": 1.0
         },
         {
-            "name": "Resident Evil 4 Remake",
-            "req_gpu": 7500,
-            "req_cpu": 8000,
-            "opt": 1.0
-        },
-        {
-            "name": "Rust",
-            "req_gpu": 6000,
-            "req_cpu": 11000,
-            "opt": 0.8
-        },
-        {
-            "name": "Satisfactory (Late Game)",
+            "name": "Satisfactory 1.0",
             "req_gpu": 6000,
             "req_cpu": 14000,
             "opt": 0.9
@@ -437,12 +710,6 @@
             "name": "Starfield",
             "req_gpu": 11000,
             "req_cpu": 13000,
-            "opt": 0.85
-        },
-        {
-            "name": "The Last of Us Part 1",
-            "req_gpu": 9000,
-            "req_cpu": 11000,
             "opt": 0.85
         },
         {
@@ -455,7 +722,7 @@
             "name": "Valorant",
             "req_gpu": 1500,
             "req_cpu": 4000,
-            "opt": 1.5
+            "opt": 1.6
         }
     ]
 }
