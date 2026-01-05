@@ -1,0 +1,88 @@
+{
+    "cpus": [
+        {
+            "name": "Intel Core i9-14900K",
+            "score": 62000
+        },
+        {
+            "name": "Intel Core i7-14700HX",
+            "score": 46000
+        },
+        {
+            "name": "AMD Ryzen 9 8940HX",
+            "score": 45000
+        },
+        {
+            "name": "Intel Core i5-13600K",
+            "score": 38000
+        },
+        {
+            "name": "AMD Ryzen 5 7600X",
+            "score": 29000
+        },
+        {
+            "name": "Intel Core i5-12400F",
+            "score": 19500
+        },
+        {
+            "name": "AMD Ryzen 5 3600",
+            "score": 17800
+        }
+    ],
+    "gpus": [
+        {
+            "name": "NVIDIA RTX 5090 (Rumored)",
+            "score": 38000
+        },
+        {
+            "name": "NVIDIA RTX 4090",
+            "score": 36000
+        },
+        {
+            "name": "NVIDIA RTX 5070",
+            "score": 19000
+        },
+        {
+            "name": "NVIDIA RTX 4070",
+            "score": 17500
+        },
+        {
+            "name": "NVIDIA RTX 3060",
+            "score": 8700
+        },
+        {
+            "name": "AMD Radeon RX 6600",
+            "score": 8100
+        },
+        {
+            "name": "NVIDIA GTX 1650",
+            "score": 3500
+        }
+    ],
+    "games": [
+        {
+            "name": "Cyberpunk 2077 (Ultra)",
+            "req_gpu": 9000,
+            "req_cpu": 12000,
+            "opt": 0.85
+        },
+        {
+            "name": "Call of Duty: Warzone",
+            "req_gpu": 6000,
+            "req_cpu": 10000,
+            "opt": 0.9
+        },
+        {
+            "name": "Fortnite (Performance)",
+            "req_gpu": 3000,
+            "req_cpu": 8000,
+            "opt": 1.1
+        },
+        {
+            "name": "GTA V",
+            "req_gpu": 3500,
+            "req_cpu": 5000,
+            "opt": 1.2
+        }
+    ]
+}

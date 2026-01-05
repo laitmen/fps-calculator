@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen FPS Calculator</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #2d2d2d; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1 { text-align: center; color: #00ff88; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        select, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: none; font-size: 16px; }
+        select { background: #404040; color: white; }
+        button { background: #00ff88; color: #1a1a1a; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.3s; }
+        button:hover { background: #00cc6a; }
+        .result-box { margin-top: 30px; text-align: center; display: none; }
+        .fps-number { font-size: 4em; font-weight: bold; color: #00ff88; }
+        .bottleneck-msg { color: #ff5555; font-size: 0.9em; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎮 FPS Calculator Pro</h1>
+    
+    <label>Seleziona Gioco</label>
+    <select id="gameSelect"><option>Caricamento...</option></select>
+
+    <label>La tua CPU</label>
+    <select id="cpuSelect"><option>Caricamento...</option></select>
+
+    <label>La tua GPU</label>
+    <select id="gpuSelect"><option>Caricamento...</option></select>
+
+    <label>Risoluzione Monitor</label>
+    <select id="resSelect">
+        <option value="1.0">1080p (FHD)</option>
+        <option value="1.77">1440p (2K)</option>
+        <option value="4.0">2160p (4K)</option>
+    </select>
+
+    <button onclick="calcolaFPS()">CALCOLA PRESTAZIONI</button>
+
+    <div class="result-box" id="resultBox">
+        <div>FPS Stimati:</div>
+        <div class="fps-number" id="fpsOutput">0</div>
+        <div class="bottleneck-msg" id="bottleneckOutput"></div>
+    </div>
+</div>
+
+<script>
+    let db = {};
+
+    // 1. CARICAMENTO DATI DAL FILE JSON
+    fetch('db.json')
+        .then(response => response.json())
+        .then(data => {
+            db = data;
+            popolaSelect('cpuSelect', data.cpus);
+            popolaSelect('gpuSelect', data.gpus);
+            popolaSelect('gameSelect', data.games);
+        })
+        .catch(err => alert("Errore caricamento db.json! Assicurati di essere su GitHub o usare un Local Server."));
+
+    function popolaSelect(id, items) {
+        const select = document.getElementById(id);
+        select.innerHTML = "";
+        items.forEach(item => {
+            let opt = document.createElement('option');
+            opt.value = item.score || JSON.stringify(item); // Per i giochi passiamo l'intero oggetto
+            opt.textContent = item.name;
+            // Se è un gioco, salviamo i requisiti nell'attributo dati
+            if(item.req_gpu) {
+                opt.setAttribute('data-req-gpu', item.req_gpu);
+                opt.setAttribute('data-req-cpu', item.req_cpu);
+                opt.setAttribute('data-opt', item.opt);
+            }
+            select.appendChild(opt);
+        });
+    }
+
+    // 2. MOTORE DI CALCOLO
+    function calcolaFPS() {
+        const cpuScore = parseInt(document.getElementById('cpuSelect').value);
+        const gpuScore = parseInt(document.getElementById('gpuSelect').value);
+        const resFactor = parseFloat(document.getElementById('resSelect').value);
+        
+        // Recuperiamo i dati del gioco selezionato
+        const gameSel = document.getElementById('gameSelect');
+        const gameOpt = gameSel.options[gameSel.selectedIndex];
+        const reqGpu = parseFloat(gameOpt.getAttribute('data-req-gpu'));
+        const reqCpu = parseFloat(gameOpt.getAttribute('data-req-cpu'));
+        const gameOptimization = parseFloat(gameOpt.getAttribute('data-opt'));
+
+        // Formula Matematica Ponderata
+        let potenzialeGpu = gpuScore / reqGpu;
+        let potenzialeCpu = cpuScore / reqCpu;
+        
+        // Calcolo Bottleneck in base alla risoluzione
+        let pesoGpu = (resFactor >= 1.77) ? 0.8 : 0.6; // A 2K/4K la GPU conta di più
+        let performance = 0;
+        let bottleneckMsg = "";
+
+        if (potenzialeGpu < potenzialeCpu) {
+            performance = potenzialeGpu; // Limitato dalla GPU
+            bottleneckMsg = "Collo di bottiglia: GPU (Scheda Video al limite)";
+        } else {
+            // Se la CPU è il limite, l'impatto è meno drastico che la GPU, ma stuttera
+            performance = potenzialeCpu; 
+            bottleneckMsg = "Collo di bottiglia: CPU (Possibile stuttering)";
+        }
+
+        // Base FPS (60 è lo standard dei requisiti raccomandati solitamente)
+        let fps = (60 * performance * gameOptimization) / Math.sqrt(resFactor);
+
+        // Mostra risultati
+        document.getElementById('resultBox').style.display = 'block';
+        document.getElementById('fpsOutput').innerText = Math.round(fps);
+        document.getElementById('bottleneckOutput').innerText = bottleneckMsg;
+    }
+</script>
+
+</body>
+</html>
