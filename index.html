@@ -3,46 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen FPS Calculator</title>
+    <title>FPS Calculator Pro 2.0</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; padding: 20px; }
-        .container { max-width: 600px; margin: 0 auto; background: #2d2d2d; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { text-align: center; color: #00ff88; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        select, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: none; font-size: 16px; }
-        select { background: #404040; color: white; }
-        button { background: #00ff88; color: #1a1a1a; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.3s; }
-        button:hover { background: #00cc6a; }
-        .result-box { margin-top: 30px; text-align: center; display: none; }
-        .fps-number { font-size: 4em; font-weight: bold; color: #00ff88; }
-        .bottleneck-msg { color: #ff5555; font-size: 0.9em; margin-top: 10px; }
+        :root { --accent: #00ff88; --bg: #121212; --panel: #1e1e1e; --text: #e0e0e0; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 20px; display: flex; justify-content: center; }
+        
+        .container { width: 100%; max-width: 700px; background: var(--panel); padding: 40px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid #333; }
+        
+        h1 { text-align: center; color: var(--accent); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .control-group { margin-bottom: 25px; position: relative; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9em; color: #aaa; }
+        
+        /* Stile Input Ricerca e Select */
+        input[type="text"] {
+            width: 100%; padding: 10px; margin-bottom: 5px; 
+            background: #2a2a2a; border: 1px solid #444; border-radius: 8px; 
+            color: white; font-size: 14px; box-sizing: border-box;
+        }
+        input[type="text"]:focus { outline: none; border-color: var(--accent); }
+
+        select { 
+            width: 100%; padding: 14px; background: #252525; border: 1px solid #444; 
+            border-radius: 8px; color: white; font-size: 16px; cursor: pointer; appearance: none;
+        }
+        select:focus { outline: none; border-color: var(--accent); }
+
+        /* Bottone */
+        button { 
+            width: 100%; padding: 18px; margin-top: 20px; 
+            background: linear-gradient(45deg, #00ff88, #00cc6a); 
+            color: #121212; font-weight: 800; font-size: 18px; border: none; 
+            border-radius: 10px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3); }
+
+        /* Risultati */
+        .result-box { 
+            margin-top: 40px; padding: 20px; background: #252525; border-radius: 15px; 
+            text-align: center; display: none; border: 1px solid #444; animation: fadeIn 0.5s;
+        }
+        .fps-number { font-size: 5em; font-weight: 900; color: var(--accent); line-height: 1; }
+        .fps-label { font-size: 1.2em; color: #fff; margin-bottom: 10px; }
+        .bottleneck-msg { color: #ff5555; font-size: 0.95em; margin-top: 15px; background: rgba(255, 85, 85, 0.1); padding: 10px; border-radius: 8px;}
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); }}
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🎮 FPS Calculator Pro</h1>
+    <h1>⚡ FPS Calculator 2.0</h1>
     
-    <label>Seleziona Gioco</label>
-    <select id="gameSelect"><option>Caricamento...</option></select>
+    <div class="control-group">
+        <label>1. SELEZIONA GIOCO</label>
+        <input type="text" id="searchGame" placeholder="Cerca gioco (es. Factorio)..." onkeyup="filterSelect('searchGame', 'gameSelect')">
+        <select id="gameSelect" size="5"></select> </div>
 
-    <label>La tua CPU</label>
-    <select id="cpuSelect"><option>Caricamento...</option></select>
+    <div class="control-group">
+        <label>2. IL TUO PROCESSORE (CPU)</label>
+        <input type="text" id="searchCpu" placeholder="Cerca CPU (es. i7, Ryzen 9)..." onkeyup="filterSelect('searchCpu', 'cpuSelect')">
+        <select id="cpuSelect" size="4"></select>
+    </div>
 
-    <label>La tua GPU</label>
-    <select id="gpuSelect"><option>Caricamento...</option></select>
+    <div class="control-group">
+        <label>3. LA TUA SCHEDA VIDEO (GPU)</label>
+        <input type="text" id="searchGpu" placeholder="Cerca GPU (es. 4070, 3060)..." onkeyup="filterSelect('searchGpu', 'gpuSelect')">
+        <select id="gpuSelect" size="4"></select>
+    </div>
 
-    <label>Risoluzione Monitor</label>
-    <select id="resSelect">
-        <option value="1.0">1080p (FHD)</option>
-        <option value="1.77">1440p (2K)</option>
-        <option value="4.0">2160p (4K)</option>
-    </select>
+    <div class="control-group">
+        <label>4. RISOLUZIONE & QUALITÀ SCHERMO</label>
+        <select id="resSelect">
+            <option value="1.0">1080p - Full HD (1920x1080)</option>
+            <option value="1.11">1200p - FHD+ 16:10 (1920x1200) [Laptop]</option>
+            <option value="1.77">1440p - 2K QHD (2560x1440)</option>
+            <option value="1.97">1600p - 2.5K QHD+ (2560x1600) [Legion/ROG]</option>
+            <option value="2.25">Ultrawide 1440p (3440x1440)</option>
+            <option value="4.0">2160p - 4K UHD (3840x2160)</option>
+        </select>
+    </div>
 
-    <button onclick="calcolaFPS()">CALCOLA PRESTAZIONI</button>
+    <button onclick="calcolaFPS()">CALCOLA FPS REALI</button>
 
     <div class="result-box" id="resultBox">
-        <div>FPS Stimati:</div>
+        <div class="fps-label">FPS Stimati</div>
         <div class="fps-number" id="fpsOutput">0</div>
         <div class="bottleneck-msg" id="bottleneckOutput"></div>
     </div>
@@ -50,70 +95,134 @@
 
 <script>
     let db = {};
+    let originalOptions = {}; // Per salvare le liste originali per il filtro
 
-    // 1. CARICAMENTO DATI DAL FILE JSON
+    // CARICAMENTO DB
     fetch('db.json')
         .then(response => response.json())
         .then(data => {
             db = data;
-            popolaSelect('cpuSelect', data.cpus);
-            popolaSelect('gpuSelect', data.gpus);
-            popolaSelect('gameSelect', data.games);
+            popolaCpu(data.cpus); // Funzione speciale per raggruppare AMD/Intel
+            popolaGenerico('gpuSelect', data.gpus);
+            popolaGenerico('gameSelect', data.games);
+            
+            // Salviamo le opzioni originali per poterle filtrare
+            salvaOpzioni('cpuSelect');
+            salvaOpzioni('gpuSelect');
+            salvaOpzioni('gameSelect');
         })
-        .catch(err => alert("Errore caricamento db.json! Assicurati di essere su GitHub o usare un Local Server."));
+        .catch(err => alert("Errore caricamento db.json. Assicurati di aver generato il file con Python!"));
 
-    function popolaSelect(id, items) {
-        const select = document.getElementById(id);
-        select.innerHTML = "";
+    // Funzione per popolare le CPU con Gruppi (AMD vs Intel)
+    function popolaCpu(items) {
+        const select = document.getElementById('cpuSelect');
+        const amdGroup = document.createElement('optgroup'); amdGroup.label = "AMD RYZEN";
+        const intelGroup = document.createElement('optgroup'); intelGroup.label = "INTEL CORE";
+
         items.forEach(item => {
             let opt = document.createElement('option');
-            opt.value = item.score || JSON.stringify(item); // Per i giochi passiamo l'intero oggetto
+            opt.value = item.score;
             opt.textContent = item.name;
-            // Se è un gioco, salviamo i requisiti nell'attributo dati
-            if(item.req_gpu) {
+            if(item.brand === "AMD") amdGroup.appendChild(opt);
+            else intelGroup.appendChild(opt);
+        });
+        select.appendChild(amdGroup);
+        select.appendChild(intelGroup);
+        select.selectedIndex = 0;
+    }
+
+    // Funzione standard per GPU e Giochi
+    function popolaGenerico(id, items) {
+        const select = document.getElementById(id);
+        items.forEach(item => {
+            let opt = document.createElement('option');
+            opt.value = item.score || JSON.stringify(item);
+            opt.textContent = item.name;
+            
+            if(item.req_gpu) { // Attributi speciali per i giochi
                 opt.setAttribute('data-req-gpu', item.req_gpu);
                 opt.setAttribute('data-req-cpu', item.req_cpu);
                 opt.setAttribute('data-opt', item.opt);
             }
             select.appendChild(opt);
         });
+        select.selectedIndex = 0;
     }
 
-    // 2. MOTORE DI CALCOLO
+    // LOGICA DI RICERCA (FILTRO)
+    function salvaOpzioni(id) {
+        const select = document.getElementById(id);
+        originalOptions[id] = Array.from(select.options); // Cloniamo le opzioni
+    }
+
+    function filterSelect(inputId, selectId) {
+        const filter = document.getElementById(inputId).value.toUpperCase();
+        const select = document.getElementById(selectId);
+        const options = originalOptions[selectId]; // Prendiamo le opzioni originali
+        
+        select.innerHTML = ""; // Puliamo la select corrente
+
+        // Ricostruiamo la select solo con i match
+        // Nota: Per le CPU dobbiamo gestire i gruppi optgroup, qui per semplicità appiattiamo la ricerca
+        let count = 0;
+        options.forEach(opt => {
+            if (opt.text.toUpperCase().indexOf(filter) > -1) {
+                select.appendChild(opt.cloneNode(true));
+                count++;
+            }
+        });
+
+        if(count === 0) {
+            let noResult = document.createElement('option');
+            noResult.text = "Nessun risultato...";
+            select.appendChild(noResult);
+        } else {
+            select.selectedIndex = 0;
+        }
+    }
+
+    // CALCOLO
     function calcolaFPS() {
+        // ... (La logica è simile a prima ma adattata alle nuove risoluzioni)
         const cpuScore = parseInt(document.getElementById('cpuSelect').value);
         const gpuScore = parseInt(document.getElementById('gpuSelect').value);
         const resFactor = parseFloat(document.getElementById('resSelect').value);
         
-        // Recuperiamo i dati del gioco selezionato
         const gameSel = document.getElementById('gameSelect');
         const gameOpt = gameSel.options[gameSel.selectedIndex];
+        
+        // Controllo se l'utente ha selezionato "Nessun risultato"
+        if(!gameOpt.hasAttribute('data-req-gpu')) return alert("Seleziona un gioco valido!");
+
         const reqGpu = parseFloat(gameOpt.getAttribute('data-req-gpu'));
         const reqCpu = parseFloat(gameOpt.getAttribute('data-req-cpu'));
         const gameOptimization = parseFloat(gameOpt.getAttribute('data-opt'));
 
-        // Formula Matematica Ponderata
         let potenzialeGpu = gpuScore / reqGpu;
         let potenzialeCpu = cpuScore / reqCpu;
         
-        // Calcolo Bottleneck in base alla risoluzione
-        let pesoGpu = (resFactor >= 1.77) ? 0.8 : 0.6; // A 2K/4K la GPU conta di più
+        // Bottleneck logic avanzata per risoluzioni alte
+        // A 1600p (1.97) o 4K (4.0), la GPU è molto più stressata
+        let pesoGpu = (resFactor >= 1.7) ? 0.85 : 0.6; 
+
         let performance = 0;
         let bottleneckMsg = "";
 
         if (potenzialeGpu < potenzialeCpu) {
-            performance = potenzialeGpu; // Limitato dalla GPU
-            bottleneckMsg = "Collo di bottiglia: GPU (Scheda Video al limite)";
+            performance = potenzialeGpu;
+            bottleneckMsg = "⚠️ Limite: Scheda Video (GPU Bottleneck). Abbassa la grafica per più FPS.";
         } else {
-            // Se la CPU è il limite, l'impatto è meno drastico che la GPU, ma stuttera
-            performance = potenzialeCpu; 
-            bottleneckMsg = "Collo di bottiglia: CPU (Possibile stuttering)";
+            // Se siamo limitati dalla CPU in un gioco come Factorio
+            performance = potenzialeCpu;
+            bottleneckMsg = "⚠️ Limite: Processore (CPU Bottleneck). La simulazione del gioco sta rallentando.";
         }
 
-        // Base FPS (60 è lo standard dei requisiti raccomandati solitamente)
+        // Formula FPS
         let fps = (60 * performance * gameOptimization) / Math.sqrt(resFactor);
+        
+        // Cap realistico (è difficile fare 500fps su giochi AAA)
+        if(fps > 300) fps = 300; 
 
-        // Mostra risultati
         document.getElementById('resultBox').style.display = 'block';
         document.getElementById('fpsOutput').innerText = Math.round(fps);
         document.getElementById('bottleneckOutput').innerText = bottleneckMsg;
