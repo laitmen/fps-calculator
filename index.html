@@ -228,31 +228,68 @@
         const reqCpu = parseFloat(gameOpt.getAttribute('data-req-cpu'));
         const gameOptimization = parseFloat(gameOpt.getAttribute('data-opt'));
 
+        // 1. Calcolo potenza grezza (Ratio)
         let potenzialeGpu = gpuScore / reqGpu;
         let potenzialeCpu = cpuScore / reqCpu;
-        
-        let pesoGpu = (resFactor >= 1.7) ? 0.85 : 0.6; 
 
-        let performance = 0;
+        // 2. Identificazione del Collo di Bottiglia (Bottleneck)
+        let pesoGpu = (resFactor >= 1.7) ? 0.85 : 0.6; 
+        
+        let rawPerformance = 0;
         let bottleneckMsg = "";
 
+        // Logica realistica: Le prestazioni sono dettate dal componente più lento
         if (potenzialeGpu < potenzialeCpu) {
-            performance = potenzialeGpu;
-            bottleneckMsg = "⚠️ Limite: Scheda Video (GPU Bottleneck). Abbassa la grafica per più FPS.";
+            rawPerformance = potenzialeGpu;
+            bottleneckMsg = "⚠️ Limite: GPU (Scheda Video al 100%)";
         } else {
-            performance = potenzialeCpu;
-            bottleneckMsg = "⚠️ Limite: Processore (CPU Bottleneck). La simulazione del gioco sta rallentando.";
+            rawPerformance = potenzialeCpu;
+            bottleneckMsg = "⚠️ Limite: CPU (Processore al limite)";
         }
 
-        let fps = (60 * performance * gameOptimization) / Math.sqrt(resFactor);
-        
-        if(fps > 300) fps = 300; 
+        // 3. FORMULA DEI RENDIMENTI DECRESCENTI (La parte importante!)
+        // Base FPS teorici (60 fps è il target dei requisiti raccomandati)
+        let baseFPS = 60 * rawPerformance;
 
+        // Applichiamo la risoluzione
+        let fps = baseFPS / Math.sqrt(resFactor);
+        
+        // Applichiamo l'ottimizzazione del motore grafico
+        fps = fps * gameOptimization;
+
+        // 4. CURVA DI REALISMO (Soft Cap)
+        // Se gli FPS superano i 144, l'hardware fa fatica a spingere oltre linearmente.
+        // Simuliamo i limiti del motore di gioco.
+        if (fps > 144) {
+            // Tutto ciò che è sopra 144 viene dimezzato (più difficile salire)
+            fps = 144 + (fps - 144) * 0.5;
+        }
+        if (fps > 240) {
+            // Tutto ciò che è sopra 240 viene diviso per 4 (quasi impossibile salire oltre)
+            fps = 240 + (fps - 240) * 0.25;
+        }
+
+        // 5. Arrotondamento finale
+        fps = Math.round(fps);
+        
+        // Limite massimo assoluto (engine cap)
+        if(fps > 999) fps = 999; 
+
+        // Visualizzazione
         document.getElementById('resultBox').style.display = 'block';
-        document.getElementById('fpsOutput').innerText = Math.round(fps);
-        document.getElementById('bottleneckOutput').innerText = bottleneckMsg;
+        document.getElementById('fpsOutput').innerText = fps;
+        
+        // Aggiungiamo un colore al bottleneck per renderlo figo
+        const msgElement = document.getElementById('bottleneckOutput');
+        msgElement.innerText = bottleneckMsg;
+        if(fps < 60) {
+            msgElement.style.color = "#ff5555"; // Rosso se pochi FPS
+        } else {
+            msgElement.style.color = "#00ff88"; // Verde se ok
+        }
     }
 </script>
 
 </body>
 </html>
+
